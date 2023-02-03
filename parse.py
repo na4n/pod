@@ -9,7 +9,7 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
 		<link>https://ricelakebiblechapel.com/</link>
 		<description>Preach the word; be diligent in season, out of season; reprove, rebuke, exhort, with all longsuffering and doctrine. -1 Tim. 2:9</description>
 		<atom:link href="https://ricelakebiblechapel.com/speakers" rel="self" type="application/rss+xml"> </atom:link>
-		
+	    <itunes:summary>Rice Lake Bible Chapel is an autonomous fellowship of believers responsible directly to Jesus Christ who is the Head of the universal church. We are non-denominational in that we seek not to be divided from any other individual who has put their trust in the Lord Jesus Chrsit and seeks to honor Him.</itunes:summary>	
 		<itunes:owner>
 			<itunes:name>RLBC</itunes:name>
 			<itunes:email>na.th.an@icloud.com</itunes:email>

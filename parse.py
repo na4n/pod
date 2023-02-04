@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import math
 
 XML = '''<?xml version='1.0' encoding='utf-8'?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
@@ -15,7 +16,7 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
 			<itunes:email>na.th.an@icloud.com</itunes:email>
 		</itunes:owner>
 		<itunes:author>RLBC</itunes:author>
-		<itunes:image href="https://images.squarespace-cdn.com/content/v1/55fc09f2e4b06df8abd1ba1d/1524265114635-R3NIHTYOVHZ7TBEY93J2/Church%2BOutline.png"> </itunes:image>
+		<itunes:image href="https://dl.dropboxusercontent.com/s/revi2cr9ilzany2/Church%2BOutline.jpg"> </itunes:image>
 
 		<googleplay:block>yes</googleplay:block>
 		<itunes:block>Yes</itunes:block>
@@ -24,7 +25,7 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
 		<pubDate>Fri, 03 Feb 2023 18:00:03 GMT</pubDate>
 		<lastBuildDate>Fri, 03 Feb 2023 18:00:03 GMT</lastBuildDate>
 		<image>
-			<url>https://images.squarespace-cdn.com/content/v1/55fc09f2e4b06df8abd1ba1d/1524265114635-R3NIHTYOVHZ7TBEY93J2/Church%2BOutline.png</url>
+			<url>https://dl.dropboxusercontent.com/s/revi2cr9ilzany2/Church%2BOutline.jpg</url>
 			<title>Rice Lake Bible Chapel Sermons</title>
 			<link>https://ricelakebiblechapel.com/</link>
 		</image>
@@ -97,7 +98,6 @@ def main():
                 title = title.replace("(", "&#40;")  
                 title = title.replace(")", "&#41;")
                 title = title.replace("&", "&#38;")
-#                print(title)
 
             if(title[0] == " "):
                 title = title[1:]
@@ -105,8 +105,10 @@ def main():
             url = element['data-url']
             length = element['data-duration-in-ms'] 
             formatted_date = day_of_week(date)
+
+            length = str(math.ceil(int(length) / 1000))
             
-            item = "\n\t\t<item>\n\t\t\t<title>" + title + "</title>\n\t\t\t<link>https://ricelakebiblechapel.com/speakers</link>\n\t\t\t<enclosure type=\"audio/mpeg\" length=\"" + length + "\" url=\"" + url + "\" />\n\t\t\t<guid isPermaLink=\"false\">" + guid_creation(date) + "</guid>\n\t\t\t<pubDate>" + formatted_date + "</pubDate>\n\t\t</item>\n" 
+            item = "\n\t\t<item>\n\t\t\t<title>" + title + "</title>\n\t\t\t<link>https://ricelakebiblechapel.com/speakers</link>\n\t\t\t<enclosure type=\"audio/mpeg\" length=\"" + length + "\" url=\"" + url + "\" />\n\t\t\t<guid isPermaLink=\"false\">" + guid_creation(date) + "</guid>\n\t\t\t<pubDate>" + formatted_date + "</pubDate>\n\t\t\t<itunes:duration>" + length + "</itunes:duration>\n\t\t</item>\n" 
             
             file.write(item)
     file.write("\n\t</channel>\n</rss>")

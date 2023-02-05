@@ -46,7 +46,7 @@ def day_of_week(date):
     day_lst = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] 
     month_lst = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-    formatted_date = day_lst[day_of_week-1] + ", " + date_lst[1] + " " + month_lst[month-1] + " 20" + str(raw_year) + " 01:00:00 GMT"
+    formatted_date = day_lst[day_of_week-1] + ", " + date_lst[1] + " " + month_lst[month-1] + " 20" + str(raw_year) + " 11:00:00 CST"
     
     return formatted_date
 

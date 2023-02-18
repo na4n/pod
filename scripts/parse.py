@@ -1,7 +1,10 @@
+#!/usr/bin/python3
+
 from bs4 import BeautifulSoup
 import requests
 import math
 
+# String containing XML header information about podcast
 XML = '''<?xml version='1.0' encoding='utf-8'?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
 
@@ -31,6 +34,8 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
 		</image>
 '''
 
+# formats XML date and day of the week based on string input mm/dd/yyyy
+# uses the doomsday algorithm to calculate day of the week based on date
 def day_of_week(date):
     date_lst = date.split("/")
     day = int(date_lst[1])
@@ -50,6 +55,8 @@ def day_of_week(date):
     
     return formatted_date
 
+# creates a guid based on the date of a podcast, as far as I can tell
+# this is meaningless
 def guid_creation(date):
     out_string = ""
     
@@ -57,13 +64,16 @@ def guid_creation(date):
         out_string += str(ord(date[i]))
    
     return out_string
-    
+
+# finds the first occurrence of a digit in a string
+# useful for retreiving the date out of differently formatted string titles
 def find_first_digit(input_str):
     while(not input_str[0].isdigit()):
         input_str = input_str[1:]
     
     return input_str
 
+# returns a standard mm/dd/yyyy formatting for variously formatted date strings
 def find_date(input_str):
     input_str = find_first_digit(input_str) 
    
@@ -78,6 +88,11 @@ def find_date(input_str):
         input_str = split_str[0] + "/" + split_str[1] + "/" + split_str[2][-2:]   
     return input_str    
 
+# the big boy, finds every audio file on the sermons site (searches for a 
+# sqs-audio-embed class tag under every div) then uses sermon info to 
+# format name, date, mp3 url, and length of sermon into RSS feed, adds
+# to the global rss variable at the top and outputs everything to a 
+# feed.rss file
 def main():
     global XML
 
@@ -87,7 +102,7 @@ def main():
     
     file = open("feed.rss", "w+")
     file.write(XML)
-    for i in range(len(result_set)): #for element in result_set:
+    for i in range(len(result_set)): 
         element = result_set[i]        
        
         if 'class' in element.attrs and 'sqs-audio-embed' in element['class']:
@@ -113,6 +128,6 @@ def main():
             file.write(item)
     file.write("\n\t</channel>\n</rss>")
         
-if __name__ == '__main__':
+if __name__ == '__main__': #supposedly standard
     main()
 

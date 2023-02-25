@@ -1,2 +1,5 @@
+# ignore all .rss files --> doesn't update repo when scripts are run
 *.rss
+
+# removes tempmorary files used by vim and emacs
 *~

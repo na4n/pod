@@ -5,6 +5,7 @@ This script scrapes and retrieves mp3 files from RLBC's website and publishes th
 # To-Do
 
 [x] set up cronjob to automate script on Sundays
+
 [ ] use .wav files for improved audio quality
     - or check garageband for improved sound quality mixing
 

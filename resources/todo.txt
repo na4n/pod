@@ -1,4 +1,0 @@
-1. Format Divs to get relevant content in XML style
-2. Figure out whether writing through python IO overwrites content or recreates file (affects dropbox link)
-3. Encode constant part, and add relevant information in the relevant date
-4. profit??

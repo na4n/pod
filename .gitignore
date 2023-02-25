@@ -3,3 +3,6 @@
 
 # removes tempmorary files used by vim and emacs
 *~
+
+#all resources aren't really important
+*/resources

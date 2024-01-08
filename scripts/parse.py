@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 import requests
 import math
+import difflib
 
 # String containing XML header information about podcast
 XML = '''<?xml version='1.0' encoding='utf-8'?>
@@ -88,22 +89,11 @@ def find_date(input_str):
         input_str = split_str[0] + "/" + split_str[1] + "/" + split_str[2][-2:]   
     return input_str    
 
-# the big boy, finds every audio file on the sermons site (searches for a 
-# sqs-audio-embed class tag under every div) then uses sermon info to 
-# format name, date, mp3 url, and length of sermon into RSS feed, adds
-# to the global rss variable at the top and outputs everything to a 
-# feed.rss file
-def main():
-    global XML
-
-    site = requests.get('https://www.ricelakebiblechapel.com/speakers')
-    soup = BeautifulSoup(site.text, 'lxml')
-    result_set = soup.find_all('div')
+def create_output(divs):
+    strng = XML
     
-    file = open("feed.rss", "w+")
-    file.write(XML)
-    for i in range(len(result_set)): 
-        element = result_set[i]        
+    for i in range(len(divs)): 
+        element = divs[i]        
        
         if 'class' in element.attrs and 'sqs-audio-embed' in element['class']:
             date = find_date(str(element['data-title'])[-10:])
@@ -125,9 +115,29 @@ def main():
             
             item = "\n\t\t<item>\n\t\t\t<title>" + title + "</title>\n\t\t\t<link>https://ricelakebiblechapel.com/speakers</link>\n\t\t\t<enclosure type=\"audio/mpeg\" length=\"" + length + "\" url=\"" + url + "\" />\n\t\t\t<guid isPermaLink=\"false\">" + guid_creation(date) + "</guid>\n\t\t\t<pubDate>" + formatted_date + "</pubDate>\n\t\t\t<itunes:duration>" + length + "</itunes:duration>\n\t\t</item>\n" 
             
-            file.write(item)
-    file.write("\n\t</channel>\n</rss>")
-        
+            strng += item
+    strng += "\n\t</channel>\n</rss>"
+    
+    return strng
+
+# the big boy, finds every audio file on the sermons site (searches for a 
+# sqs-audio-embed class tag under every div) then uses sermon info to 
+# format name, date, mp3 url, and length of sermon into RSS feed, adds
+# to the global rss variable at the top and outputs everything to a 
+# feed.rss file
+def main():
+    global XML
+
+    site = requests.get('https://www.ricelakebiblechapel.com/speakers')
+    soup = BeautifulSoup(site.text, 'lxml')
+    divs = soup.find_all('div')
+
+    out = create_output(divs)
+ 
+    file = open("feed.rss", "w+")
+    file.write(out)
+    file.close()
+   
 if __name__ == '__main__': #supposedly standard
     main()
 

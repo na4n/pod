@@ -29,7 +29,7 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
 		<pubDate>Fri, 03 Feb 2023 18:00:03 GMT</pubDate>
 		<lastBuildDate>Fri, 03 Feb 2023 18:00:03 GMT</lastBuildDate>
 		<image>
-			<url>https://dl.dropboxusercontent.com/s/revi2cr9ilzany2/Church%2BOutline.jpg</url>
+			<url>https://raw.githubusercontent.com/na4n/pod/main/scripts/img.png</url>
 			<title>Rice Lake Bible Chapel Sermons</title>
 			<link>https://ricelakebiblechapel.com/</link>
 		</image>

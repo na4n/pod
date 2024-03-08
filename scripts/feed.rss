@@ -12,7 +12,7 @@
 			<itunes:email>na.th.an@icloud.com</itunes:email>
 		</itunes:owner>
 		<itunes:author>RLBC</itunes:author>
-		<itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/img.png"> </itunes:image>
+		<itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/feed.rss"> </itunes:image>
 
 		<googleplay:block>yes</googleplay:block>
 		<itunes:block>Yes</itunes:block>
@@ -25,6 +25,24 @@
 			<title>Rice Lake Bible Chapel Sermons</title>
 			<link>https://ricelakebiblechapel.com/</link>
 		</image>
+
+		<item>
+			<title>On Fire for Christ&#8211;Lee Brainerd</title>
+			<link>https://ricelakebiblechapel.com/speakers</link>
+			<enclosure type="audio/mpeg" length="2291" url="https://static1.squarespace.com/static/55fc09f2e4b06df8abd1ba1d/t/65e2c07fb2911e6c6254b38f/1709359287029/2024-02-25+Lee+Brainerd+On+Fire+for+Christ.mp3/original/2024-02-25+Lee+Brainerd+On+Fire+for+Christ.mp3" />
+			<guid isPermaLink="false">5250475350475048</guid>
+			<pubDate>Sun, 25 Feb 2024 11:00:00 CST</pubDate>
+			<itunes:duration>2291</itunes:duration>
+		</item>
+
+		<item>
+			<title>Why Do Men Reject Christ?&#8211;Nathan Wagner</title>
+			<link>https://ricelakebiblechapel.com/speakers</link>
+			<enclosure type="audio/mpeg" length="2749" url="https://static1.squarespace.com/static/55fc09f2e4b06df8abd1ba1d/t/65e2c03cafb09f689a9d0cac/1709359231525/Untitled+-+2_18_24%2C+12.44%E2%80%AFPM+%281%29.mp3/original/Untitled+-+2_18_24%2C+12.44%E2%80%AFPM+%281%29.mp3" />
+			<guid isPermaLink="false">5250475649475048</guid>
+			<pubDate>Sun, 18 Feb 2024 11:00:00 CST</pubDate>
+			<itunes:duration>2749</itunes:duration>
+		</item>
 
 		<item>
 			<title>Spiritual Gifts&#8211;Matt Radmer</title>

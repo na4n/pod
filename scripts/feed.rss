@@ -12,7 +12,7 @@
 			<itunes:email>na.th.an@icloud.com</itunes:email>
 		</itunes:owner>
 		<itunes:author>RLBC</itunes:author>
-		<itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/img.png"> </itunes:image>
+		<itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img.png"> </itunes:image>
 
 		<googleplay:block>yes</googleplay:block>
 		<itunes:block>Yes</itunes:block>
@@ -21,7 +21,7 @@
 		<pubDate>Fri, 03 Feb 2023 18:00:03 GMT</pubDate>
 		<lastBuildDate>Fri, 03 Feb 2023 18:00:03 GMT</lastBuildDate>
 		<image>
-			<url>https://raw.githubusercontent.com/na4n/pod/main/scripts/img.png</url>
+			<url>https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img.png</url>
 			<title>Rice Lake Bible Chapel Sermons</title>
 			<link>https://ricelakebiblechapel.com/</link>
 		</image>

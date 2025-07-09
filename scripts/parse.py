@@ -6,7 +6,7 @@ import math
 import difflib
 
 # String containing XML header information about podcast
-XML = '''<?xml version='1.0' encoding='utf-8'?>
+XML = '''<?sml version='1.0' encoding='utf-8'?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
 
 	<channel>
@@ -134,7 +134,7 @@ def main():
 
     out = create_output(divs)
  
-    file = open("feed.rss", "w+")
+    file = open("feed.xml", "w+")
     file.write(out)
     file.close()
    

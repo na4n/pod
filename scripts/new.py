@@ -5,7 +5,6 @@ import requests
 import math
 import html
 
-# Corrected XML declaration and itunes:image format
 XML = '''<?xml version='1.0' encoding='utf-8'?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom"
      xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0"
@@ -68,13 +67,21 @@ def create_output(divs):
     output = XML
     for element in divs:
         if 'class' in element.attrs and 'sqs-audio-embed' in element['class']:
-            date = find_date(str(element['data-title'])[-10:])
-            raw_title = element['data-title'].split(" - ")[0] + " – " + element['data-author']
-            title = html.escape(raw_title.strip())
+            raw_title = element['data-title'].strip()
+            date = find_date(raw_title[-10:])
+            formatted_date = day_of_week(date)
             url = element['data-url']
             length = str(math.ceil(int(element['data-duration-in-ms']) / 1000))
-            pub_date = day_of_week(date)
             guid = guid_creation(date)
+
+            # Parse title and author if format "title - author" is present
+            if ' - ' in raw_title:
+                title_part, author_part = raw_title.rsplit(' - ', 1)
+                title = html.escape(title_part.strip())
+                author = html.escape(author_part.strip())
+            else:
+                title = html.escape(raw_title)
+                author = "Rice Lake Bible Chapel Sermons"
 
             item = f'''
     <item>
@@ -82,8 +89,9 @@ def create_output(divs):
       <link>https://ricelakebiblechapel.com/speakers</link>
       <enclosure url="{url}" type="audio/mpeg" length="{length}"/>
       <guid isPermaLink="false">{guid}</guid>
-      <pubDate>{pub_date}</pubDate>
+      <pubDate>{formatted_date}</pubDate>
       <itunes:duration>{length}</itunes:duration>
+      <itunes:author>{author}</itunes:author>
     </item>'''
             output += item
     output += '\n  </channel>\n</rss>'

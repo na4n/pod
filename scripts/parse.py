@@ -81,53 +81,30 @@ def create_output(divs):
     output = XML
     for element in divs:
         if 'class' in element.attrs and 'sqs-audio-embed' in element['class']:
-            raw_title = element.get('data-title', '').strip()
-
-            # --- Step 1: Extract date ---
-            date = None
-            date_match = re.match(r'^(\d{4}[-/]\d{2}[-/]\d{2})[\s\-]+(.*)$', raw_title)
-            if date_match:
-                raw_date = date_match.group(1)
-                rest = date_match.group(2)
-                date = find_date(raw_date)
-            else:
-                date = find_date(raw_title)
-                rest = raw_title
-
-            if not date:
-                print(f"⚠️  Skipping entry due to missing date: {raw_title}")
-                continue
-
-            formatted_date = day_of_week(date)
-
             try:
+                raw_title = element.get('data-title', '').strip()
+
+                # Step 1: Get speaker from data-author
+                speaker = html.escape(element.get('data-author', 'Unknown').strip())
+
+                # Step 2: Extract date from title
+                date = find_date(raw_title)
+                if not date:
+                    print(f"⚠️  Skipping entry due to missing date: {raw_title}")
+                    continue
+                formatted_date = day_of_week(date)
+
+                # Step 3: Strip date from end of title for cleanliness
+                title = re.sub(r'\s*[-–]\s*\d{1,4}[/-]\d{1,2}[/-]\d{2,4}$', '', raw_title).strip()
+                title = html.escape(title)
+
+                # Step 4: Other metadata
                 url = element['data-url']
                 length = str(math.ceil(int(element['data-duration-in-ms']) / 1000))
                 guid = guid_creation(date)
+                description = f"<description>{speaker}.</description>"
 
-                # --- Step 2: Extract title and speaker ---
-                title = ""
-                speaker = ""
-                description = ""
-
-                # Pattern: Speaker - Title (after date or otherwise)
-                if ' - ' in rest:
-                    part1, part2 = rest.split(' - ', 1)
-
-                    # Heuristic: if there's a date at the beginning and "part1" has two words -> likely "Speaker - Title"
-                    if date_match or (len(part1.split()) <= 3 and len(part2.split()) >= 2):
-                        speaker = html.escape(part1.strip())
-                        title = html.escape(part2.strip())
-                    else:  # assume "Title - Speaker"
-                        title = html.escape(part1.strip())
-                        speaker = html.escape(part2.strip())
-
-                    description = f"<description>Spoken by {speaker}.</description>"
-                else:
-                    title = html.escape(rest.strip())  # Just use the raw text
-                    description = ""
-
-                # --- Step 3: Emit episode <item> ---
+                # Step 5: Build item
                 item = f'''
     <item>
       <title>{title}</title>
@@ -145,7 +122,6 @@ def create_output(divs):
 
     output += '\n  </channel>\n</rss>'
     return output
-
 
 def main():
     site = requests.get('https://www.ricelakebiblechapel.com/speakers')

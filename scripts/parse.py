@@ -23,14 +23,14 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
       <itunes:email>na.th.an@icloud.com</itunes:email>
     </itunes:owner>
     <itunes:author>RLBC</itunes:author>
-    <itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img.png"/>
+    <itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img_old.png"/>
     <googleplay:block>yes</googleplay:block>
     <itunes:block>Yes</itunes:block>
     <language>en-US</language>
     <pubDate>Fri, 03 Feb 2023 18:00:03 GMT</pubDate>
     <lastBuildDate>Fri, 03 Feb 2023 18:00:03 GMT</lastBuildDate>
     <image>
-      <url>https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img.png</url>
+      <url>https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img_old.png</url>
       <title>Rice Lake Bible Chapel Sermons</title>
       <link>https://ricelakebiblechapel.com/</link>
     </image>
@@ -102,7 +102,7 @@ def create_output(divs):
                 url = element['data-url']
                 length = str(math.ceil(int(element['data-duration-in-ms']) / 1000))
                 guid = guid_creation(date)
-                description = f"<description>{speaker}.</description>"
+                description = f"<description>{speaker}</description>"
 
                 # Step 5: Build item
                 item = f'''

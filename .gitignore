@@ -4,3 +4,4 @@
 #all resources aren't really important
 /resources
 
+*.DS_Store*

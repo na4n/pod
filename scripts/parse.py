@@ -23,7 +23,7 @@ XML = '''<?xml version='1.0' encoding='utf-8'?>
       <itunes:email>na.th.an@icloud.com</itunes:email>
     </itunes:owner>
     <itunes:author>RLBC</itunes:author>
-    <itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img_old.png"/>
+    <itunes:image href="https://raw.githubusercontent.com/na4n/pod/main/scripts/resources/img.png"/>
     <googleplay:block>yes</googleplay:block>
     <itunes:block>Yes</itunes:block>
     <language>en-US</language>
